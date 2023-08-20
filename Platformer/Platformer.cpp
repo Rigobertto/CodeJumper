@@ -1,10 +1,14 @@
 #include "Engine.h"
 #include "Platformer.h"
 #include "Resources.h"
+#include "Obstacle.h"
 
 // -----------------------------------------------------------------------------
 
 Scene * Platformer::scene = nullptr;
+Image * virus = nullptr;
+Obstacle* obj = nullptr;                // um obstáculo do jogo
+list<Obstacle*> objects;                      // lista de obstáculos em movimento
 
 // -----------------------------------------------------------------------------
 
@@ -25,6 +29,16 @@ void Platformer::Init()
 
    // plat = new Platform(400, 200);
    // scene->Add(plat, STATIC);
+
+    virus = new Image("Resources/spritesVirus/virus_1.png");
+
+    obj = new Obstacle(virus, 650);
+    obj->MoveTo(1000, 650);
+    objects.push_back(obj);
+
+    obj = new Obstacle(virus, 650);
+    obj->MoveTo(2000, 650);
+    objects.push_back(obj);
 }
 
 // ------------------------------------------------------------------------------
@@ -38,6 +52,10 @@ void Platformer::Update()
     // atualiza cena do jogo
     scene->Update();
     scene->CollisionDetection();
+
+    // move objetos
+    for (auto obj : objects)
+        obj->Update();
 } 
 
 // ------------------------------------------------------------------------------
@@ -46,6 +64,10 @@ void Platformer::Draw()
 {
    scene->Draw();
    scene->DrawBBox();
+
+   // desenha obstáculos
+   for (auto obj : objects)
+       obj->Draw();
 } 
 
 // ------------------------------------------------------------------------------
@@ -53,6 +75,11 @@ void Platformer::Draw()
 void Platformer::Finalize()
 {
     delete scene;
+    // remove obstáculos
+    for (auto obj : objects)
+        delete obj;
+
+    delete virus;
 }
 
 
