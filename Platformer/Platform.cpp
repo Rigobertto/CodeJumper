@@ -20,7 +20,7 @@ Platform::Platform(float posX, float posY)
 
     MoveTo(posX, posY);
 
-    BBox(new Rect(-backgF1->Width()/2, -backgF1->Height()/10, backgF1->Width()/2, backgF1->Height()/2));
+    BBox(new Rect(-backgF1->Width()/2, 20, backgF1->Width()/2, backgF1->Height()/2));
 }
 
 // ---------------------------------------------------------------------------------
