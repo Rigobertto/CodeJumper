@@ -1,14 +1,3 @@
-/**********************************************************************************
-// Background (Código Fonte)
-// 
-// Criação:     21 Abr 2012
-// Atualização: 12 Mar 2023
-// Compilador:  Visual C++ 2022
-//
-// Descrição:   Plano de fundo do jogo
-//
-**********************************************************************************/
-
 #include "Background.h"
 
 // ---------------------------------------------------------------------------------
@@ -16,14 +5,14 @@
 Background::Background()
 {
     MoveTo(window->CenterX(), window->CenterY(), Layer::BACK);
-    xF = xB = x;
+    yF = yB = y;
 
     // carrega imagens
-    imgF = new Image("Resources/BackgFront.png");
-    imgB = new Image("Resources/BackgBack.png");
+    imgF = new Image("");
+    imgB = new Image("");
 
     // cria sprites do plano de fundo
-    sky     = new Sprite("Resources/Sky.png");    
+    sky     = new Sprite("Resources/spritesbg/bg_binario.png");    
     backgF1 = new Sprite(imgF);
     backgF2 = new Sprite(imgF);
     backgB1 = new Sprite(imgB);
@@ -48,8 +37,8 @@ Background::~Background()
 void Background::Update()
 {
     // move sprites com velocidades diferentes
-    xF -= 200 * gameTime;
-    xB -= 150 * gameTime;
+    yF += 200 * gameTime;
+    yB += 200 * gameTime;
 }
 
 // -------------------------------------------------------------------------------
@@ -60,20 +49,20 @@ void Background::Draw()
     sky->Draw(window->CenterX(), window->CenterY(), Layer::BACK);
 
     // desenha prédios mais distantes
-    backgB1->Draw(xB, y, Layer::LOWER);
-    backgB2->Draw(xB + imgB->Width(), y, Layer::LOWER);
+    backgB1->Draw(x, yB, Layer::LOWER);
+    backgB2->Draw(x + imgB->Width(), yB, Layer::LOWER);
     
     // traz pano de fundo de volta para dentro da tela
-    if (xB + imgB->Width()/2.0f < 0)
-        xB += imgB->Width();
+    if (yB + imgB->Width()/2.0f < 0)
+        yB += imgB->Width();
 
     // desenha prédios mais próximos
-    backgF1->Draw(xF, y, Layer::MIDDLE);
-    backgF2->Draw(xF + imgF->Width(), window->Height()/2.0f, Layer::MIDDLE);
+    backgF1->Draw(x, yF, Layer::MIDDLE);
+    backgF2->Draw(x + imgF->Width(), window->Height()/2.0f, Layer::MIDDLE);
 
     // traz pano de fundo de volta para dentro da tela
-    if (xF + imgF->Width()/2.0f < 0)
-        xF += imgF->Width();
+    if (yF + imgF->Width()/2.0f < 0)
+        yF += imgF->Width();
 }
 
 // -------------------------------------------------------------------------------

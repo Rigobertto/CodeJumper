@@ -1,14 +1,3 @@
-/**********************************************************************************
-// Platformer (Código Fonte)
-//
-// Criação:     05 Out 2011
-// Atualização: 12 Mar 2023
-// Compilador:  Visual C++ 2022
-//
-// Descrição:   Exemplo de jogo estilo platforma
-//
-**********************************************************************************/
-
 #include "Engine.h"
 #include "Platformer.h"
 #include "Resources.h"
@@ -31,11 +20,11 @@ void Platformer::Init()
     player = new Player();
     scene->Add(player, MOVING);
 
-    Platform * plat = new Platform(500, 100, LARGE);
+    Platform * plat = new Platform(683, 707);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(1300, 200, LARGE);
-    scene->Add(plat, STATIC);
+   // plat = new Platform(400, 200);
+   // scene->Add(plat, STATIC);
 }
 
 // ------------------------------------------------------------------------------
@@ -79,9 +68,9 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
     // configura o motor do jogo
     engine->window->Mode(WINDOWED);
-    engine->window->Size(600, 300);
+    engine->window->Size(1366, 768);
     engine->window->Color(150, 200, 230);
-    engine->window->Title("Platformer");
+    engine->window->Title("Code Jumper");
     engine->window->Icon(IDI_ICON);
     //engine->window->Cursor(IDC_CURSOR);
     //engine->graphics->VSync(true);

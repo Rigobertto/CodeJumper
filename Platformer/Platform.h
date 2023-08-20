@@ -1,13 +1,4 @@
-/**********************************************************************************
-// Platform (Arquivo de Cabeçalho)
-// 
-// Criação:     21 Abr 2012
-// Atualização: 12 Mar 2023
-// Compilador:  Visual C++ 2022
-//
-// Descrição:   Plataformas do jogo
-//
-**********************************************************************************/
+
 
 #ifndef _PLATFORMER_PLATFORM_H_
 #define _PLATFORMER_PLATFORM_H_
@@ -27,10 +18,21 @@ enum PLATTYPES { SMALL, MEDIUM, LARGE };
 class Platform : public Object
 {
 private:
-    Sprite * platform = nullptr;        // sprite da plataforma
+    Sprite * platform1 = nullptr;        // sprite da plataforma
+    Sprite * platform2 = nullptr;
+
+
+    float xF;                       // posição horizontal dos sprites
+    Image * imgF1;                       // imagem de fundo frontal
+    Image * imgF2;
+
+                          // fundo estático
+    Sprite * backgF1;                   // pano de fundo dinâmico (frontal 1)
+    Sprite * backgF2;                 // pano de fundo dinâmico (frontal 2)
+
 
 public:
-    Platform(float posX, float posY, uint platType);    
+    Platform(float posX, float posY);    
     ~Platform();
 
     void Update();                      // atualização do objeto
@@ -40,8 +42,11 @@ public:
 // ---------------------------------------------------------------------------------
 // Função Membro Inline
 
-inline void Platform::Draw()
-{ platform->Draw(x, y, z); }
+/*inline void Platform::Draw()
+{   
+    platform1->Draw(x, y, z); 
+    platform2->Draw(x, y, z);
+}*/
 
 // ---------------------------------------------------------------------------------
 

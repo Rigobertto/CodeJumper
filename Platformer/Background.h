@@ -1,13 +1,4 @@
-/**********************************************************************************
-// Background (Arquivo de Cabeçalho)
-// 
-// Criação:     21 Abr 2012
-// Atualização: 12 Mar 2023
-// Compilador:  Visual C++ 2022
-//
-// Descrição:   Plano de fundo do jogo
-//
-**********************************************************************************/
+
 
 #ifndef _PLATFORMER_BACKGROUND_H_
 #define _PLATFORMER_BACKGROUND_H_
@@ -23,7 +14,7 @@
 class Background : public Object
 {
 private:
-    float xF, xB;                       // posição horizontal dos sprites
+    float yF, yB;                       // posição horizontal dos sprites
     Image * imgF;                       // imagem de fundo frontal
     Image * imgB;                       // imagem de fundo traseira    
 
