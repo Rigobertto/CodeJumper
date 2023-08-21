@@ -37,7 +37,7 @@ Platform::~Platform()
 
 void Platform::Update()
 {
-    xF -= 200 * gameTime;
+    xF -= 300 * gameTime;
     //Translate(-200.0f * gameTime, 0);
 }
 

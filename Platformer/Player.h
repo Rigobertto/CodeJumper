@@ -12,16 +12,20 @@
 // ------------------------------------------------------------------------------
 
 enum Gravity {NORMAL,INVERTED};         // tipo da gravidade
-
+enum Forma { JUMP, MOVE };
 // ---------------------------------------------------------------------------------
 
 class Player : public Object
 {
 private:
     TileSet * tileset = nullptr;        // folha de sprites do personagem
+    TileSet* tilesetJump = nullptr;
     Animation * anim = nullptr;         // animação do personagem
+    Animation * animJump = nullptr;
+    Animation * animMove = nullptr;
     uint gravity = NORMAL;              // gravidade atuando sobre o jogador
     bool keyCtrl = false;               // controle do pressionamento da barra de espaço
+    uint forma = MOVE;
 
 public:
     Player();                           // construtor

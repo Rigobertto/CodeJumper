@@ -7,7 +7,7 @@
 
 Scene * Platformer::scene = nullptr;
 Image * virus = nullptr;
-Obstacle* obj = nullptr;                // um obstáculo do jogo
+Obstacle * obstacle = nullptr;                // um obstáculo do jogo
 list<Obstacle*> objects;                      // lista de obstáculos em movimento
 
 // -----------------------------------------------------------------------------
@@ -27,18 +27,25 @@ void Platformer::Init()
     Platform * plat = new Platform(683, 707);
     scene->Add(plat, STATIC);
 
+    obstacle = new Obstacle();
+    //obstacle->MoveTo(240, 240);
+    scene->Add(obstacle, MOVING);
+
+    //level = new Home();
+   // level->Init();
+
    // plat = new Platform(400, 200);
    // scene->Add(plat, STATIC);
 
-    virus = new Image("Resources/spritesVirus/virus_1.png");
+    //virus = new Image("Resources/spritesVirus/virus_1.png");
 
-    obj = new Obstacle(virus, 650);
-    obj->MoveTo(1000, 650);
-    objects.push_back(obj);
+    obstacle = new Obstacle();
+    //obstacle->MoveTo(500, 650);
+   // objects.push_back(obstacle);
 
-    obj = new Obstacle(virus, 650);
-    obj->MoveTo(2000, 650);
-    objects.push_back(obj);
+   // obstacle = new Obstacle(650);
+    //obstacle->MoveTo(2000, 650);
+   // objects.push_back(obstacle);
 }
 
 // ------------------------------------------------------------------------------
@@ -99,7 +106,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     engine->window->Color(150, 200, 230);
     engine->window->Title("Code Jumper");
     engine->window->Icon(IDI_ICON);
-    //engine->window->Cursor(IDC_CURSOR);
+    engine->window->Cursor(IDC_CURSOR);
     //engine->graphics->VSync(true);
     
     // inicia o jogo
