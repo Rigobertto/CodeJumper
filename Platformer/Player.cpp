@@ -15,19 +15,27 @@
 
 Player::Player()
 {
-    tileset = new TileSet("Resources/spritesplayer/p_running.png", 86, 214, 5,  10);
-    anim = new Animation(tileset, 0.090f, true);
+    tileset = new TileSet("Resources/spritesplayer/player_moving.png", 72, 178, 6, 12); //("Resources/spritesplayer/p_running.png", 86, 214, 5,  10)
+    tilesetJump = new TileSet("Resources/spritesplayer/player_moving.png", 72, 178, 6, 12);
+
+    uint move[6] = { 6, 7, 8, 9, 10, 11 };
+    uint jump[6] = { 0,1,2,3,4, 5 };
+
+    animJump = new Animation(tilesetJump, 0.25f, true);
+    animMove = new Animation(tileset, 0.090f, true);
+    animMove->Add(MOVE, move, 6);
+    animJump->Add(JUMP, jump, 6);
+    anim = animMove;
 
     MoveTo(100.0f, 600.0f, 0.0f);
 
     uint normal[5] = {0,1,2,3,4 };
-    uint invertido[5] = {5, 6, 7, 8, 9 };
+    
     
     //anim->Add(INVERTED, invertido, 4);
-    //anim->Add(NORMAL, normal, 4);
+    
 
-
-    BBox(new Rect(-43, -85, +43, +85));
+    BBox(new Rect(-43, -80, +43, +90));
 }
 
 // ---------------------------------------------------------------------------------
@@ -35,6 +43,9 @@ Player::Player()
 Player::~Player()
 {
     delete tileset;
+    delete tilesetJump;
+    delete animJump;
+    delete animMove;
     delete anim;
 }
 
@@ -43,10 +54,11 @@ Player::~Player()
 void Player::OnCollision(Object * obj)
 {
     // mantém personagem na posição correta em cima da plataforma
-   if (gravity == NORMAL)
-        MoveTo(100.0f, obj->Y() - 66);
-   
-    
+    if (gravity == NORMAL) {
+        MoveTo(100.0f, obj->Y() - 71);
+        anim = animMove;
+    }
+     
     
 }
 
@@ -55,22 +67,25 @@ void Player::OnCollision(Object * obj)
 void Player::Update()
 {
     anim->NextFrame();
+    float time = 0;
     //MoveTo(80.0f, obj->Y() - 50);
     // ação da gravidade sobre o personagem
     if (gravity == NORMAL)
-        Translate(0, 200 * gameTime);
+        Translate(0, 300 * gameTime);
     else
-        Translate(0, -200 * gameTime);
+        Translate(0, -300 * gameTime);
+    
 
     if (keyCtrl && window->KeyDown(VK_SPACE))
     {
-        keyCtrl = false;
+        keyCtrl = true;
        // gravity = !gravity;
-        Translate(0, -600 * gameTime);
+       Translate(0, -200 * gameTime);
 
         if (gravity == NORMAL) {
-            Translate(0, 12);
+            Translate(0, 0);
             anim->Select(NORMAL);
+            anim->Select(MOVE);
 
         }
        
@@ -80,8 +95,11 @@ void Player::Update()
         keyCtrl = true;
     }
 
-    if (keyCtrl && window->KeyDown(VK_UP)) {
-        Translate(0, -1800 * gameTime);
+    if (keyCtrl && window->KeyDown(VK_SPACE)) {
+
+        Translate(0, -1500 * gameTime);
+        anim = animJump;
+
     }
     
 

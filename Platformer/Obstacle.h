@@ -4,25 +4,30 @@
 // ---------------------------------------------------------------------------------
 // Inclusões
 
-#include "Types.h"            // tipos específicos da engine
-#include "Object.h"           // interface de object
+#include "Types.h"         // interface de object
 #include "Sprite.h"           // interface de sprites
-#include "Image.h"            // interface de image
-
+#include "Image.h"                     // tipos específicos da engine
+#include "Object.h"                     // interface de Object
+#include "Animation.h" 
 // ---------------------------------------------------------------------------------
 
 class Obstacle : public Object
 {
 private:
-    Sprite* sprite;
+    TileSet * tileset = nullptr;        // folha de sprites do personagem
+    Animation * anim = nullptr;
+    Sprite * sprite;
     float vel;
+    //bool isObstacle = true;
 
 public:
-    Obstacle(Image* img, float speed);
+    Obstacle();
     ~Obstacle();
 
+    void OnCollision(Object * obj);
     void Update();
     void Draw();
+    //bool isObstacle();
 };
 
 // ---------------------------------------------------------------------------------
@@ -30,7 +35,7 @@ public:
 
 inline void Obstacle::Draw()
 {
-    sprite->Draw(x, y, z);
+    anim->Draw(x, y, z);
 }
 
 // ---------------------------------------------------------------------------------
